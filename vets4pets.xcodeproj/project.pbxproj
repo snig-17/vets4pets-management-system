@@ -6,6 +6,19 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		F4F6E1BE2E64E471005FEDE3 /* BitCollections in Frameworks */ = {isa = PBXBuildFile; productRef = F4F6E1BD2E64E471005FEDE3 /* BitCollections */; };
+		F4F6E1C02E64E471005FEDE3 /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = F4F6E1BF2E64E471005FEDE3 /* Collections */; };
+		F4F6E1C22E64E471005FEDE3 /* DequeModule in Frameworks */ = {isa = PBXBuildFile; productRef = F4F6E1C12E64E471005FEDE3 /* DequeModule */; };
+		F4F6E1C42E64E471005FEDE3 /* HashTreeCollections in Frameworks */ = {isa = PBXBuildFile; productRef = F4F6E1C32E64E471005FEDE3 /* HashTreeCollections */; };
+		F4F6E1C62E64E471005FEDE3 /* HeapModule in Frameworks */ = {isa = PBXBuildFile; productRef = F4F6E1C52E64E471005FEDE3 /* HeapModule */; };
+		F4F6E1C82E64E471005FEDE3 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = F4F6E1C72E64E471005FEDE3 /* OrderedCollections */; };
+		F4F6E1CA2E64E471005FEDE3 /* _RopeModule in Frameworks */ = {isa = PBXBuildFile; productRef = F4F6E1C92E64E471005FEDE3 /* _RopeModule */; };
+		F4F6E1CD2E64E4AC005FEDE3 /* Crypto in Frameworks */ = {isa = PBXBuildFile; productRef = F4F6E1CC2E64E4AC005FEDE3 /* Crypto */; };
+		F4F6E1CF2E64E4AC005FEDE3 /* _CryptoExtras in Frameworks */ = {isa = PBXBuildFile; productRef = F4F6E1CE2E64E4AC005FEDE3 /* _CryptoExtras */; };
+		F4F6E1D22E64E4E6005FEDE3 /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = F4F6E1D12E64E4E6005FEDE3 /* Logging */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		F4F6E19F2E64E3EA005FEDE3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -65,6 +78,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4F6E1C02E64E471005FEDE3 /* Collections in Frameworks */,
+				F4F6E1C62E64E471005FEDE3 /* HeapModule in Frameworks */,
+				F4F6E1C82E64E471005FEDE3 /* OrderedCollections in Frameworks */,
+				F4F6E1BE2E64E471005FEDE3 /* BitCollections in Frameworks */,
+				F4F6E1D22E64E4E6005FEDE3 /* Logging in Frameworks */,
+				F4F6E1C42E64E471005FEDE3 /* HashTreeCollections in Frameworks */,
+				F4F6E1C22E64E471005FEDE3 /* DequeModule in Frameworks */,
+				F4F6E1CA2E64E471005FEDE3 /* _RopeModule in Frameworks */,
+				F4F6E1CD2E64E4AC005FEDE3 /* Crypto in Frameworks */,
+				F4F6E1CF2E64E4AC005FEDE3 /* _CryptoExtras in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,6 +148,16 @@
 			);
 			name = vets4pets;
 			packageProductDependencies = (
+				F4F6E1BD2E64E471005FEDE3 /* BitCollections */,
+				F4F6E1BF2E64E471005FEDE3 /* Collections */,
+				F4F6E1C12E64E471005FEDE3 /* DequeModule */,
+				F4F6E1C32E64E471005FEDE3 /* HashTreeCollections */,
+				F4F6E1C52E64E471005FEDE3 /* HeapModule */,
+				F4F6E1C72E64E471005FEDE3 /* OrderedCollections */,
+				F4F6E1C92E64E471005FEDE3 /* _RopeModule */,
+				F4F6E1CC2E64E4AC005FEDE3 /* Crypto */,
+				F4F6E1CE2E64E4AC005FEDE3 /* _CryptoExtras */,
+				F4F6E1D12E64E4E6005FEDE3 /* Logging */,
 			);
 			productName = vets4pets;
 			productReference = F4F6E18D2E64E3E7005FEDE3 /* vets4pets.app */;
@@ -208,6 +241,11 @@
 			);
 			mainGroup = F4F6E1842E64E3E7005FEDE3;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				F4F6E1BC2E64E471005FEDE3 /* XCRemoteSwiftPackageReference "swift-collections" */,
+				F4F6E1CB2E64E4AC005FEDE3 /* XCRemoteSwiftPackageReference "swift-crypto" */,
+				F4F6E1D02E64E4E6005FEDE3 /* XCRemoteSwiftPackageReference "swift-log" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = F4F6E18E2E64E3E7005FEDE3 /* Products */;
 			projectDirPath = "";
@@ -608,6 +646,86 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		F4F6E1BC2E64E471005FEDE3 /* XCRemoteSwiftPackageReference "swift-collections" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-collections.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.1;
+			};
+		};
+		F4F6E1CB2E64E4AC005FEDE3 /* XCRemoteSwiftPackageReference "swift-crypto" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-crypto.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.15.0;
+			};
+		};
+		F4F6E1D02E64E4E6005FEDE3 /* XCRemoteSwiftPackageReference "swift-log" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-log";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.6.4;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		F4F6E1BD2E64E471005FEDE3 /* BitCollections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F4F6E1BC2E64E471005FEDE3 /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = BitCollections;
+		};
+		F4F6E1BF2E64E471005FEDE3 /* Collections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F4F6E1BC2E64E471005FEDE3 /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = Collections;
+		};
+		F4F6E1C12E64E471005FEDE3 /* DequeModule */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F4F6E1BC2E64E471005FEDE3 /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = DequeModule;
+		};
+		F4F6E1C32E64E471005FEDE3 /* HashTreeCollections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F4F6E1BC2E64E471005FEDE3 /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = HashTreeCollections;
+		};
+		F4F6E1C52E64E471005FEDE3 /* HeapModule */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F4F6E1BC2E64E471005FEDE3 /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = HeapModule;
+		};
+		F4F6E1C72E64E471005FEDE3 /* OrderedCollections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F4F6E1BC2E64E471005FEDE3 /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = OrderedCollections;
+		};
+		F4F6E1C92E64E471005FEDE3 /* _RopeModule */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F4F6E1BC2E64E471005FEDE3 /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = _RopeModule;
+		};
+		F4F6E1CC2E64E4AC005FEDE3 /* Crypto */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F4F6E1CB2E64E4AC005FEDE3 /* XCRemoteSwiftPackageReference "swift-crypto" */;
+			productName = Crypto;
+		};
+		F4F6E1CE2E64E4AC005FEDE3 /* _CryptoExtras */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F4F6E1CB2E64E4AC005FEDE3 /* XCRemoteSwiftPackageReference "swift-crypto" */;
+			productName = _CryptoExtras;
+		};
+		F4F6E1D12E64E4E6005FEDE3 /* Logging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F4F6E1D02E64E4E6005FEDE3 /* XCRemoteSwiftPackageReference "swift-log" */;
+			productName = Logging;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = F4F6E1852E64E3E7005FEDE3 /* Project object */;
 }
