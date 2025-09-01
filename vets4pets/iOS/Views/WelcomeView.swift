@@ -16,56 +16,142 @@ struct WelcomeView: View {
     // MARK: - Data
     private let onboardingPages = OnboardingPage.allPages
     
+    // MARK: - Action Methods
+       private func handleGetStarted() {
+           withAnimation(.spring()) {
+               // TODO: Navigate to main app
+               print("Get Started tapped! Ready to go to main app")
+           }
+       }
+       
+       private func handleSkip() {
+           withAnimation(.spring()) {
+               // TODO: Navigate to main app
+               print("Skip tapped! Going directly to main app")
+           }
+       }
+    
     var body: some View {
-        VStack(spacing: 30){
-            
-            Vets4PetsLogoView()
-            
-            Text("Welcome to Vets4Pets!")
-                .font(.largeTitle)
-                .padding()
-            
-            Text("We have \(onboardingPages.count)")
-                .font(.caption)
-                .foregroundStyle(.secondary)
-            
-            if onboardingPages.indices.contains(currentPage) {
-                let page = onboardingPages[currentPage]
-                VStack {
-                    Image(systemName: page.icon)
-                        .font(.system(size: 40))
-                        .foregroundStyle(page.colour)
-                    Text(page.title)
-                        .font(.headline)
-                    Text(page.description)
-                        .font(.caption)
-                        .multilineTextAlignment(.center)
-                        .padding(.horizontal)
-                }
-                .padding()
-            }
-            HStack{
-                Button("Previous"){
-                    if currentPage > 0 {
-                        currentPage -= 1
+        GeometryReader { geometry in
+            ZStack {
+                // MARK: - Animated Background
+                AnimatedGradientBackground(animate: $animateGradient).ignoresSafeArea()
+                
+                // MARK: - Content
+                VStack(spacing: 30){
+                    Spacer()
+                    
+                    Vets4PetsLogoView()
+                        .scaleEffect(showGetStarted ? 1.0 : 0.8)
+                        .animation(.spring(response: 0.6, dampingFraction: 0.8), value: showGetStarted)
+                    VStack(spacing: 10){
+                        Text("Welcome to ")
+                            .font(.title2)
+                            .foregroundStyle(.secondary)
+                        
+                        
+                        Text("Vets4Pets")
+                            .font(.largeTitle)
+                            .fontWeight(.bold)
+                            .foregroundStyle(
+                                LinearGradient(
+                                    colors: [.vetPrimary, .vetSecondary],
+                                    startPoint: .leading,
+                                    endPoint: .trailing
+                                )
+                            )
+                        
                     }
-                }
-                .disabled(currentPage == 0)
-                
-                Spacer()
-                
-                Text("Page \(currentPage + 1)")
-                
-                Spacer()
-                
-                Button("Next"){
-                    if currentPage < onboardingPages.count - 1 {
-                        currentPage += 1
+                    .opacity(showGetStarted ? 1.0 : 0.0)
+                    .offset(y: showGetStarted ? 0 : 20)
+                    .animation(.easeOut(duration: 0.8).delay(0.2), value: showGetStarted)
+                    
+                    Spacer()
+                    
+                    TabView(selection: $currentPage){
+                        ForEach(Array(onboardingPages.enumerated()), id: \.element) { index, page in
+                            OnboardingCardView(page: page)
+                                .tag(index)
+                        }
                     }
+                    .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+                    .frame(height: 280)
+                    .opacity(showGetStarted ? 1.0 : 0.0)
+                    .offset(y: showGetStarted ? 0 : 50)
+                    .animation(.easeOut(duration: 0.8).delay(0.4), value: showGetStarted)
+                    
+                    Spacer()
+                    
+                    // MARK: - Bottom Action Section
+                    VStack(spacing: VetSpacing.lg) {
+                        // page indicator dots
+                        HStack(spacing: VetSpacing.sm) {
+                            ForEach(0..<onboardingPages.count, id: \.self) { index in
+                                Circle()
+                                    .fill(index == currentPage ? Color.vetPrimary : Color.gray.opacity(0.3))
+                                    .frame(
+                                        width: index == currentPage ? 12 : 8,
+                                        height: index == currentPage ? 12 : 8)
+                                    .animation(.spring(response: 0.4, dampingFraction: 0.8), value: currentPage)
+                            }
+                        }
+                        
+                        // get started button
+                        
+                        if currentPage == onboardingPages.count - 1 {
+                            GetStartedButton {
+                                handleGetStarted()
+                            }
+                            .padding(.horizontal, VetSpacing.lg)
+                            .transition(.asymmetric(insertion: .move(edge: .bottom).combined(with: .opacity), removal: .move(edge: .bottom).combined(with: .opacity)
+                                                   ))
+                        } else {
+                            // next button
+                            Button(action: {
+                                withAnimation(.spring(response: 0.5, dampingFraction: 0.8)) {
+                                    currentPage = min(onboardingPages.count - 1, currentPage + 1)
+                                }
+                            }) {
+                                HStack(spacing: VetSpacing.sm) {
+                                    Text("Next")
+                                        .font(.vetLabelLarge)
+                                        .fontWeight(.medium)
+                                    
+                                    Image(systemName: "arrow.right")
+                                        .font(.system(size: 14, weight: .medium))
+                                }
+                                .foregroundStyle(.primary)
+                                .frame(maxWidth: .infinity)
+                                .frame(height: 48)
+                                .background(Color.vetPrimary.opacity(0.1))
+                                .clipShape(RoundedRectangle(cornerRadius: VetRadius.md))
+                            }
+                            .padding(.horizontal, VetSpacing.lg)
+                            .transition(.asymmetric(
+                                insertion: .move(edge: .bottom).combined(with: .opacity), removal: .move(edge: .bottom).combined(with: .opacity)
+                            ))
+                        }
+                        //skip button
+                        if currentPage < onboardingPages.count - 1 {
+                            Button("Skip for now") {
+                                handleSkip()
+                            }
+                            .font(.vetBodyMedium)
+                            .foregroundStyle(.secondary)
+                            .transition(.opacity)
+                        }
+                    }
+                    .opacity(showGetStarted ? 1.0 : 0.0)
+                    .offset(y: showGetStarted ? 0 : 30)
+                    .animation(.easeOut(duration:0.8).delay(0.6), value: showGetStarted)
                 }
-                .disabled(currentPage == onboardingPages.count - 1)
             }
-            .padding()
+        }
+        .onAppear {
+            withAnimation(.easeOut(duration: 1.0)) {
+                animateGradient = true
+                showGetStarted = true
+            }
         }
     }
 }
@@ -76,7 +162,7 @@ struct OnboardingPage: Identifiable, Hashable {
     let icon: String
     let title: String
     let description: String
-    let colour: Color
+    let color: Color
     
     //static data - all our onboarding pages
     static let allPages = [
@@ -84,26 +170,26 @@ struct OnboardingPage: Identifiable, Hashable {
                     icon: "heart.text.square.fill",
                     title: "Complete Medical Records",
                     description: "Keep track of your pet's health history, vaccinations, and treatments in one secure place.",
-                    colour: .vetPrimary
+                    color: .vetPrimary
                 ),
                 OnboardingPage(
                     icon: "calendar.badge.plus",
                     title: "Smart Appointment Scheduling",
                     description: "Book appointments, receive reminders, and never miss important veterinary visits.",
-                    colour: .vetSecondary
+                    color: .vetSecondary
                 ),
                 OnboardingPage(
                     icon: "bell.badge.fill",
                     title: "Intelligent Notifications",
                     description: "Get timely reminders for vaccinations, medications, and follow-up appointments.",
-                    colour: .vetAccent
+                    color: .vetAccent
                 ),
                 OnboardingPage(
                     icon: "icloud.and.arrow.up.fill",
                     title: "Sync Across All Devices",
                     description: "Access your pet's information on iPhone, iPad, Mac, and Apple Watch seamlessly.",
-                    colour: .vetInfo
-                )
+                    color: .vetInfo
+            )
     ]
 }
 
@@ -132,6 +218,93 @@ struct Vets4PetsLogoView: View {
                 )
         }
         .vetElevation(.lg)
+    }
+}
+
+// MARK: - Animated Gradient Background
+struct AnimatedGradientBackground: View {
+    @Binding var animate: Bool
+    var body: some View {
+        LinearGradient(
+            colors: [Color.vetPrimary.opacity(animate ? 0.1:0.05),
+                     Color.vetSecondary.opacity(animate ? 0.05:0.1),
+                     Color.vetBackground],
+            startPoint: animate ? .topLeading : .bottomTrailing,
+            endPoint: animate ? .bottomTrailing : .topLeading
+        )
+        .animation(
+            .easeInOut(duration: 4).repeatForever(autoreverses: true), value: animate
+        )
+    }
+}
+
+// MARK: - OnboardingCardView
+struct OnboardingCardView: View {
+    let page: OnboardingPage
+    
+    var body: some View {
+        VStack(spacing: VetSpacing.lg) {
+            ZStack {
+                Circle()
+                    .fill(page.color.opacity(0.15))
+                    .frame(width: 80, height: 80)
+                
+                Image(systemName: page.icon)
+                    .font(.system(size: 35, weight: .medium))
+                    .foregroundStyle(page.color)
+            }
+            VStack(spacing: VetSpacing.md) {
+                Text(page.title)
+                    .font(.vetHeadlineSmall)
+                    .foregroundColor(.primary)
+                    .multilineTextAlignment(.center)
+                
+                Text(page.description)
+                    .font(.vetBodyLarge)
+                    .foregroundStyle(.secondary)
+                    .multilineTextAlignment(.center)
+                    .lineLimit(3)
+            }
+        }
+        .padding(.horizontal, VetSpacing.xl)
+    }
+}
+
+struct GetStartedButton: View {
+    let action: () -> Void
+    @State private var isPressed = false
+    
+    var body: some View {
+        Button(action: action) {
+            HStack(spacing: VetSpacing.sm) {
+                Text("Get Started")
+                    .font(.vetLabelLarge)
+                    .fontWeight(.semibold)
+                
+                Image(systemName: "arrow.right")
+                    .font(.system(size: 16, weight: .semibold))
+            }
+            .foregroundStyle(.white)
+            .frame(maxWidth: .infinity)
+            .frame(height: 56)
+            .background(
+                LinearGradient(
+                    colors: [.vetPrimary, .vetSecondary],
+                    startPoint: .leading,
+                    endPoint: .trailing
+                )
+            )
+            .clipShape(RoundedRectangle(cornerRadius: VetRadius.lg))
+            .vetElevation(.md)
+            .scaleEffect(isPressed ? 0.98 : 1.0)
+            .animation(.easeInOut(duration: 0.1), value: isPressed)
+        }
+        .buttonStyle(PlainButtonStyle())
+        .onLongPressGesture(minimumDuration: 0, maximumDistance: .infinity) { 
+            isPressed = true
+        } onPressingChanged: { pressing in
+            isPressed = pressing
+        }
     }
 }
 

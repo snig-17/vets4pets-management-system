@@ -8,23 +8,23 @@
 import SwiftUI
 
 extension Color {
-    // MARK: - Primary Brand Colours
+    // MARK: - Primary Brand colors
     static let vetPrimary = Color.blue
     static let vetSecondary = Color.teal
     static let vetAccent = Color.red
     
-    // MARK: - Semantic Colours
+    // MARK: - Semantic colors
     static let vetBackground = Color(UIColor.systemBackground)
     static let vetSurface = Color(UIColor.secondarySystemBackground)
     static let vetCardBackground = Color(UIColor.tertiarySystemBackground)
     
-    // MARK: - Status Colours
+    // MARK: - Status colors
     static let vetSuccess = Color.green
     static let vetWarning = Color.orange
     static let vetError = Color.red
     static let vetInfo = Color.blue
     
-    // MARK: - Pet Species Colours
+    // MARK: - Pet Species colors
     static let dogColor = Color.brown
     static let catColor = Color.gray
     static let birdColor = Color.yellow
