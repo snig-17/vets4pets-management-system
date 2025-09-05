@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import PhotosUI
 
 struct AddPetView: View {
     // MARK: - Properties
@@ -21,6 +22,11 @@ struct AddPetView: View {
     @State private var ownerName = ""
     @State private var contactNumber = ""
     
+    //photo picker state
+    @State private var selectedPhoto: PhotosPickerItem?
+    @State private var photoData: Data?
+    
+    //species options
     let speciesOptions = ["Dog", "Cat"]
     
     // Allows view to dismiss the sheet
@@ -40,6 +46,33 @@ struct AddPetView: View {
     var body: some View {
         NavigationView{
             Form{
+                //photo section
+                Section(header:Text("Pet Photo")){
+                    VStack(spacing: 16){
+                        //photo display
+                       PhotoDisplayView(selectedPhoto: photoData)
+                        //photo picker button
+                        PhotosPicker(
+                            selection: $selectedPhoto,
+                            matching: .images,
+                            photoLibrary: .shared()
+                        ) {
+                            Label("Select Photo", systemImage: "photo")
+                            .foregroundStyle(Color.blue)
+                            .padding(.vertical, 8)
+                        }
+                        .onChange(of: selectedPhoto) { newPhoto in
+                            Task {
+                                if let data = try? await newPhoto?.loadTransferable(type: Data.self){
+                                    photoData = data
+                                }
+                            }
+                        }
+                    }
+                    .frame(maxWidth: .infinity)
+                }
+                
+                
                 // pet information section
                 Section(header: Text("Pet Information")){
                     // name field
@@ -79,6 +112,9 @@ struct AddPetView: View {
                     .disabled(!isFormValid)
                 }
             }
+            .onAppear{
+                loadPetData()
+            }
         }
     }
     // MARK: - Form Validation
@@ -99,6 +135,7 @@ struct AddPetView: View {
             age = pet.age
             ownerName = pet.ownerName
             contactNumber = pet.contactNumber
+            photoData = pet.photoData
         }
     }
     //save the pet
@@ -114,7 +151,9 @@ struct AddPetView: View {
                 breed: breed,
                 age: age,
                 ownerName: ownerName,
-                contactNumber: contactNumber)
+                contactNumber: contactNumber,
+                photoData: photoData
+            )
             petController.updatePet(updatedPet)
         } else {
             let newPet = Pet(
@@ -123,7 +162,8 @@ struct AddPetView: View {
                 breed: breed,
                 age: age,
                 ownerName: ownerName,
-                contactNumber: contactNumber
+                contactNumber: contactNumber,
+                photoData: photoData
             )
             petController.addPet(newPet)
         }

@@ -14,6 +14,9 @@ struct PetHeaderView: View {
             Text(pet.species)
                 .font(.system(size: 80))
             VStack(alignment: .leading, spacing: 8){
+                PhotoDisplayView(selectedPhoto: pet.photoData)
+                    .frame(width: 150, height: 150)
+                
                 Text(pet.name)
                     .font(.largeTitle)
                     .fontWeight(.bold)

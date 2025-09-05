@@ -10,18 +10,26 @@ import SwiftUI
 struct PetRow: View {
     let pet: Pet
     var body: some View {
-        HStack{
-            //pet icon
-            Text(pet.species).font(.largeTitle)
+        HStack(spacing: 30){
+            //pet photo
+            PhotoDisplayView(selectedPhoto: pet.photoData)
+                .frame(width: 40, height: 40)
+                .clipped()
+                
+                
+            
             VStack(alignment: .leading){
                 Text(pet.name)
                     .font(.headline)
+                    .lineLimit(1)
                 Text("\(pet.breed) • \(pet.age)")
                     .font(.subheadline)
                     .foregroundStyle(.gray)
+                    .lineLimit(1)
                 Text(pet.ownerName)
                     .font(.caption)
                     .foregroundStyle(.blue)
+                    .lineLimit(1)
             }
             Spacer()
         }
