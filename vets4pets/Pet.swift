@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct Pet: Identifiable { //means each pet can be uniquely identified
+struct Pet: Identifiable, Codable { //means each pet can be uniquely identified
     let id: UUID
     var name: String
     var species: String
@@ -19,6 +19,9 @@ struct Pet: Identifiable { //means each pet can be uniquely identified
     var photoData: Data?
     
     // MARK: - Computed Properties
+    var hasOhoto: Bool {
+        photoData != nil
+    }
     //get UIImage from stored photo data
     var photo: UIImage? {
         guard let photoData = photoData else {return nil}
@@ -52,13 +55,12 @@ struct Pet: Identifiable { //means each pet can be uniquely identified
         self.contactNumber = contactNumber
         self.photoData = photoData
     }
-    
-    
-    //sample data for testing
-    
-    static let samplePets = [
+}
+
+// MARK: - Sample Data
+extension Pet {
+    static let samplePets: [Pet] = [
         Pet(name: "Buddy", species: "Dog", breed: "Golden Retriever", age: "3 yrs", ownerName: "John Smith", contactNumber: "07787167083", photoData: nil),
         Pet(name: "Ford", species: "Dog", breed: "Husky", age: "7 yrs", ownerName: "John Smith", contactNumber: "07787167083", photoData: nil)
     ]
 }
-

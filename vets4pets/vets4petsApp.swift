@@ -6,27 +6,21 @@
 //
 
 import SwiftUI
-import SwiftData
 
 
+@main
 struct vets4petsApp: App {
-    var sharedModelContainer: ModelContainer = {
-        let schema = Schema([
-            Item.self,
-        ])
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
-
-        do {
-            return try ModelContainer(for: schema, configurations: [modelConfiguration])
-        } catch {
-            fatalError("Could not create ModelContainer: \(error)")
-        }
-    }()
+    // MARK: - Shared Data Controller
+    @StateObject private var petController = PetController()
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            PetListView()
+                .environmentObject(petController)
+                .onAppear{
+                    print("Vets4Pets launched with \(petController.pets.count) pets")
+                }
         }
-        .modelContainer(sharedModelContainer)
+        
     }
 }

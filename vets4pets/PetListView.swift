@@ -10,10 +10,9 @@ import Foundation
 
 struct PetListView: View {
     // MARK: - Controller
-    @StateObject private var petController = PetController()
+    @EnvironmentObject var petController: PetController
     
     // MARK: - State
-    @State private var pets = Pet.samplePets
     @State private var showingAddPet = false //controls whether addPetView is visible
     @State private var petToDelete: Pet?
     @State private var showingDeleteAlert = false
@@ -22,24 +21,36 @@ struct PetListView: View {
     
     var body: some View {
         NavigationView{
-            Group{
-                if petController.isEmpty {
+            Group {
+                if petController.pets.isEmpty {
                     emptyStateView
                 } else {
                     petListView
                 }
             }
-            .navigationTitle("Vets4Pets")
+            .navigationTitle("My Pets")
             .toolbar {
-                toolbarContent
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        showingAddPet = true
+                    }){
+                        Image(systemName: "plus")
+                    }
+                }
             }
             .sheet(isPresented: $showingAddPet) {
-                AddPetView(petController: petController)
+                AddPetView(petController: petController).environmentObject(petController)
+            }
+            .alert("Delete Pet", isPresented: $showingDeleteAlert, presenting: petToDelete) { pet in
+                Button("Cancel", role: .cancel) {
+                    petToDelete = nil
                 }
-            .alert("Delete Pet", isPresented: $showingDeleteAlert){
-                deleteAlertButtons
-            } message: {
-                deleteAlertMessage
+                Button("Delete", role: .destructive) {
+                    petController.deletePet(pet)
+                    petToDelete = nil
+                }
+            } message: { pet in
+                Text("Are you sure you want to remove \(pet.name) from your records? This action cannot be undone.")
             }
         }
     }
@@ -74,35 +85,6 @@ struct PetListView: View {
         }
         .padding()
     }
-    // MARK: - Toolbar Content
-    private var toolbarContent: some ToolbarContent {
-        ToolbarItem(placement: .navigationBarTrailing) {
-            Button("Add Pet"){
-                showingAddPet = true
-            }
-        }
-    }
-    // MARK: - Delete Alert
-    private var deleteAlertButtons: some View {
-        Group {
-            Button("Cancel", role: .cancel){
-                petToDelete = nil
-            }
-            Button("Delete", role: .destructive) {
-                if let pet = petToDelete {
-                    petController.deletePet(pet)
-                    petToDelete = nil
-                }
-            }
-        }
-    }
-    private var deleteAlertMessage: some View {
-        Group {
-            if let pet = petToDelete {
-                Text("Are you sure you want to remove \(pet.name) from your records? This action cannot be undone.")
-            }
-        }
-    }
     // MARK: - Actions
     private func handleSwipeDelete(at offsets: IndexSet){
         if let firstIndex = offsets.first {
@@ -113,5 +95,5 @@ struct PetListView: View {
 }
 
 #Preview {
-    PetListView()
+    PetListView().environmentObject(PetController())
 }
