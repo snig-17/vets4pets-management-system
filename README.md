@@ -65,26 +65,26 @@ open VetCarePro.xcodeproj
 
 ### Testing Flow
 
-Launch app → Experience empty state or sample data
-Add pet → Complete form with photo selection
-Test persistence → Force quit and relaunch app
-Edit functionality → Navigate to detail view and modify
-Delete operations → Swipe gesture with confirmation alert
+1. Launch app → Experience empty state or sample data
+1. Add pet → Complete form with photo selection
+1. Test persistence → Force quit and relaunch app
+1. Edit functionality → Navigate to detail view and modify
+1. Delete operations → Swipe gesture with confirmation alert
 
 ## 📱 Device Support
 
-iPhone - iOS 17.0+ (iPhone 12 and newer recommended)
-iPad - iPadOS 17.0+ with adaptive layouts
-Simulator - Full Xcode Simulator compatibility
-Camera - Photo picker requires camera/photo library permissions
+- iPhone - iOS 17.0+ (iPhone 12 and newer recommended)
+- iPad - iPadOS 17.0+ with adaptive layouts
+- Simulator - Full Xcode Simulator compatibility
+- Camera - Photo picker requires camera/photo library permissions
 
 ## 🎯 Performance
 
-Launch Time: < 0.5s cold start
-Data Loading: Instantaneous UserDefaults retrieval
-Photo Processing: Native iOS photo picker performance
-Memory Usage: Optimized with proper ARC and weak references
-Persistence: Zero-latency automatic saving on data changes
+- Launch Time: < 0.5s cold start
+- Data Loading: Instantaneous UserDefaults retrieval
+- Photo Processing: Native iOS photo picker performance
+- Memory Usage: Optimized with proper ARC and weak references
+- Persistence: Zero-latency automatic saving on data changes
 
 ## 🏗️ Architecture Highlights
 
