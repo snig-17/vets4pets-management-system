@@ -46,7 +46,7 @@
 		F4F6E1B02E64E3EA005FEDE3 /* Exceptions for "vets4pets" folder in "vets4pets" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Info.plist,
+				"Supporting Files/Info.plist",
 			);
 			target = F4F6E18C2E64E3E7005FEDE3 /* vets4pets */;
 		};
