@@ -3,9 +3,9 @@ A professional veterinary EMR(Emergency Medical Record) iOS application built wi
 
 ## 🚀 Live Demo
 
-Platform: iOS 17.0+ (iPhone/iPad)
-Build: Xcode 15.0+ required
-Status: Portfolio-ready production application
+- Platform: iOS 17.0+ (iPhone/iPad)
+- Build: Xcode 15.0+ required
+- Status: Portfolio-ready production application
 
 ## 🛠️ Tech Stack
 
