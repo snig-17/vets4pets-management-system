@@ -48,16 +48,20 @@ Status: Portfolio-ready production application
 ## 🔧 Development
 
 ### Local Development
-
-`` {Copy# Clone repository
+Copy
+```console
+# Clone repository
 git clone https://github.com/yourusername/vetcare-pro.git
-cd vetcare-pro}``
+cd vetcare-pro
+```
 
 #### Open in Xcode
-``open VetCarePro.xcodeproj``
+open VetCarePro.xcodeproj
+
 
 #### Build and run
-``⌘ + R (or click Run button)``
+⌘ + R (or click Run button)
+
 
 ### Testing Flow
 
