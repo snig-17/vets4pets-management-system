@@ -49,9 +49,9 @@ Status: Portfolio-ready production application
 
 ### Local Development
 
-``Copy# Clone repository
+`` {Copy# Clone repository
 git clone https://github.com/yourusername/vetcare-pro.git
-cd vetcare-pro``
+cd vetcare-pro}``
 
 #### Open in Xcode
 ``open VetCarePro.xcodeproj``
