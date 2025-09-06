@@ -9,11 +9,11 @@ A professional veterinary EMR(Emergency Medical Record) iOS application built wi
 
 ## 🛠️ Tech Stack
 
-1. SwiftUI - Modern declarative UI framework
-1. Swift 5.9 - Type-safe iOS development language
-1. PhotosUI - Native iOS photo picker integration
-1. UserDefaults - Lightweight data persistence layer
-1. Foundation - Core iOS frameworks and utilities
+- SwiftUI - Modern declarative UI framework
+- Swift 5.9 - Type-safe iOS development language
+-  PhotosUI - Native iOS photo picker integration
+-   UserDefaults - Lightweight data persistence layer
+-   Foundation - Core iOS frameworks and utilities
 
 ##  🎨 Features
 
